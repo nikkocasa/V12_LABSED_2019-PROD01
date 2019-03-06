@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <template id="contact" inherit_id="web.menu_secondary">
+            <xpath expr="//span[@class='oe_logo_edit']" position="before">
+                <!--<t t-if="True" groups="developer_mode.odoo_developer_group">-->
+                    <div style="height:20px;text-align:center;background-color:green;color:#ffffff;">
+                        <t t-esc="request.session.db"/>
+                    </div>
+                <!--</t>-->
+            </xpath>
+        </template>
+</odoo>

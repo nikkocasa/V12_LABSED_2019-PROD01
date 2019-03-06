@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record id="product_template_ehanced_form_view_lot_tracking" model="ir.ui.view">
+        <field name="name">ehanced.product.template.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='tracking']" position="after">
+                <field name="use_sequence_lot"
+                       attrs="{'invisible': [('tracking', '=','none')]}"
+                       modifiers="{'invisible':[['tracking','=','none']]}"/>
+                <field name="sequence_id"
+                       attrs="{'invisible':[('use_sequence_lot', '=', False)]}"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,56 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="product_codification_form_view">
+            <field name="name">product.codification_form</field>
+            <field name="model">product.codification</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form name="Code Produit Paramètre">
+                    <group col="2">
+                        <field name="name_struct" select="1" required="True" class="oe_inline"/>
+                        <field name="type_code" required="True" class="oe_inline"/>
+                        <field name="value_code" required="True" class="oe_inline"/>
+                        <field name="label_code" required="True" class="oe_inline" colspan="4"/>
+                        <field name="barcode_char" class="oe_inline"/>
+                        <field name="text_code" colspan="10"/>
+                        <field name="product_num_sequence_id"
+                               attrs="{'invisible': [('name_struct', '==', 'nature')]}"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_codification_tree_view">
+            <field name="name">product.codification_tree</field>
+            <field name="model">product.codification</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree name="List Param">
+                    <field name="sequence" widget="handle" modifiers="{}"/>
+                    <field name="name_struct"/>
+                    <field name="display_name"/>
+                    <field name="value_code"/>
+                    <field name="type_code"/>
+                    <field name="barcode_char"/>
+                    <field name="label_code"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_product_codification_tree_view">
+            <field name="name">Liste des Paramètres Codes Produits</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.codification</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem id="menu_product_codification"
+          name="Code produits"
+          parent="stock.menu_product_in_config_stock"
+          action="action_product_codification_tree_view"
+          sequence="6"/>
+
+    </data>
+</odoo>

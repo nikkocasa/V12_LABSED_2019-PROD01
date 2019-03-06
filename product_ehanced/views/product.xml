@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="product_product_ehanced_form_view" model="ir.ui.view">
+        <field name="name">ehanced.product.product.form</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+
+             <field name="categ_id" position="after">
+                <field name="sale_GS1_EAN13"
+                       attrs="{'invisible': [('|'),('sale_ok', '!=', True), ('product_variant_count', '&gt;', 1)]}"/>
+            </field>
+
+            <xpath expr="//group[@name='group_standard_price']" position="after">
+                <group name="set_code" string="Calcul du Code Produit" colspan="6" class="oe_edit_only">
+                    <field name="variante_num" string="Numéro de la variante" force_save="True"
+                           placeholder="01 : Deux chiffres uniques pour déterminer les variantes"/>
+                    <field name="calculated_code" string="Résultat : "/>
+                    <!--<field name="calculated_code" string="Résultat : " readonly="1" force_save="True"/>-->
+                    <div class="oe_button_box" name="button_setcode">
+                        <button string="Obtenir un code" name="action_getProductCode" type="object"/>
+                        <button string="Affecter le code" name="action_setProductCode" type="object"/>
+                        <button string="Calculer le code Barre" name="action_setCodeBar" type="object"/>
+                    </div>
+                </group>
+            </xpath>
+
+            <notebook position="inside">
+                <page name="raw_mat" string="Matière Prem.">
+                    <!--  attrs="{'invisible': [('raw_mat', '!=', True)]}">-->
+                    <group name="names" string="Dénomination">
+                        <field name="name_latin"/>
+                        <field name="name_current"/>
+                        <field name="raw_plant_material"/>
+                    </group>
+                    <group name="caracts" string="Caractériques" col="4">
+                        <field name="inci"/>
+                        <field name="cas"/>
+                    </group>
+                    <group name="Densités" col="8">
+                        <field name="density_min" colspan="3"/>
+                        <field name="density_max" class="oe_inline" colspan="3"/>
+                        <label for="density_moy" string="Valeur de densité moyenne\n retenue pour les caluls"
+                               class="oe_inline oe_right" colspan="4"/>
+                        <field name="density_moy" nolabel="1" readonly="1"
+                               help="Cette valeur devrait être recalculée comme la moyenne des densités constatées sur les Lots entrants"/>
+                    </group>
+                </page>
+            </notebook>
+
+        </field>
+
+    </record>
+
+
+
+</odoo>

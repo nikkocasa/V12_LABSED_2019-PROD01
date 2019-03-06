@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="res_partner_zip_form_view">
+            <field name="name">res.zip.form</field>
+            <field name="model">res.zip</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form name="Zip">
+                    <group col="4">
+                        <field name="name" select="1" required="True" class="oe_inline"/>
+                        <field name="zip_format"/>
+                        <field name="zip_country"/>
+                    </group>
+                    <group>
+                        <field name="city_ids" required="True"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="res_partner_zip_tree_view">
+            <field name="name">res.zip.tree</field>
+            <field name="model">res.zip</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree name="Zip">
+                    <field name="name" string="Zip Code"/>
+                    <field name="city_ids"/>
+                    <field name="zip_country"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_res_zip_tree_view">
+            <field name="name">Zip list</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.zip</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>

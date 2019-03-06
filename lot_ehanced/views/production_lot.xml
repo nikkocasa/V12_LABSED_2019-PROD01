@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record id="ehanced_view_production_lot_form" model="ir.ui.view">
+        <field name="name">ehanced.stock.production.lot.form</field>
+        <field name="model">stock.production.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="replace">
+                <field name="sequence_editable" attrs="{'invisible': True}"/>
+                <field name="name" attrs="{'required':True, 'readonly': [('sequence_editable', '=', False)]}"/>
+                <label for="name" string="(Le numéro de séquence peut changer à la validation)" class="oe_edit_only"/>
+            </xpath>
+
+            <xpath expr="//field[@name='product_id']" position="replace">
+                <field name="product_id"
+                       help="Product this lot/serial number contains. You cannot change it anymore if it has already been moved."
+                       can_create="False" can_write="False"
+                       colspan="6"/>
+                <field name="production_date" string="Date de prod" sequence="1" colspan="6"/>
+            </xpath>
+            <xpath expr="//group[@name='main_group']" position="after">
+                <group name="info" string="Information " col="6">
+                    <field name="supplier_id" colspan="4"/>
+                    <field name="container_type" colspan="4"/>
+                    <field name="container_weight"/>
+                    <field name="summary_att"/>
+                </group>
+                <group name="options" string="Options" col="4">
+                    <field name="with_samples" class="oe_inline"/>
+                    <field name="with_analyses"/>
+
+                </group>
+                <notebook position="inside">
+                    <page name="analysis" string="Analyses"
+                          attrs="{'invisible': [('with_analyses', '!=', True)]}">
+                        <group name="files" string="Documentation / Règlementaire" col="4">
+                            <field name="security_form" string="Fiche sécurité"/>
+                            <field name="security_form_attach" string="Fichier lié"
+                              attrs="{'invisible': [('security_form', '!=', True)]}"/>
+                            <field name="ifra_form" string="Fiche IFRA"/>
+                            <field name="ifra_form_attach" string="Fichier_lié"
+                              attrs="{'invisible': [('ifra_form', '!=', True)]}"/>
+                            <field name="technical_data" string="Fiche technique"/>
+                            <field name="technical_data_attach" string="Fichier_lié"
+                              attrs="{'invisible': [('technical_data', '!=', True)]}"/>
+                            <field name="allergen_list" string="Fiche allergènes"/>
+                            <field name="allergen_list_attach" string="Fichier_lié"
+                              attrs="{'invisible': [('allergen_list', '!=', True)]}"/>
+                            <field name="chromato_file" string="Chromato"/>
+                            <field name="chromato_file_attach" string="Fichier_lié"
+                              attrs="{'invisible': [('chromato_file', '!=', True)]}"/>
+                        </group>
+                    </page>
+                    <page name="samples" string="Echantillons" col="4"
+                          attrs="{'invisible': [('with_samples', '!=', True)]}">
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
+
+
