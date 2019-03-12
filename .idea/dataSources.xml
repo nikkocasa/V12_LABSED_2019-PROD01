@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="V12-ENT_TEST01@localhost" uuid="5e4f50a8-07c5-45e0-a44c-6436efb11fa4">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <remarks>V12-ENT_TEST01</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/V12-ENT_TEST01</jdbc-url>
+    </data-source>
+  </component>
+</project>

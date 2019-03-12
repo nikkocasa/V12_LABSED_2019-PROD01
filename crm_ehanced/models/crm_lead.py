@@ -2,7 +2,7 @@
 # © 2016 Antiun Ingeniería S.L. - Jairo Llopis
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 
 
 class CrmLead(models.Model):
@@ -10,9 +10,9 @@ class CrmLead(models.Model):
 
     contact_name = fields.Char(string="Prénom")
     contact_lastname = fields.Char(string="Nom")
-    lead_language = fields.Man2one(
+    lead_language = fields.Many2one(
                     comodel_name="res.lang",
-                    string='Langue du contact')
+                    string=_('Langue du contact'))
     date_contact = fields.Date(string="Date du contact")
 
     @api.multi

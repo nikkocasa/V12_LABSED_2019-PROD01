@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 {
     'name': "City constrains",
 
@@ -16,8 +15,8 @@
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/master/odoo/addons/base/module/module_data.xml
     # for the full list
-    'category': 'tools',
-    'version': '11.0.01',
+    'category': 'sedarome',
+    'version': '12.0.01',
     'application': 'True',
 
     # any module necessary for this one to work correctly
@@ -39,5 +38,6 @@
         'demo/demo.xml',
     ],
 }
+# -*- coding: utf-8 -*-
 
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "vrm_ehanced",
+    'name': "crm_ehanced",
 
     'summary': """
         Ajouts de champs spécifiques pour Sedarome""",
@@ -19,7 +19,7 @@
     # Check https://github.com/odoo/odoo/blob/master/odoo/addons/base/module/module_data.xml
     # for the full list
     'category': 'sedarome',
-    'version': '11.0.1',
+    'version': '12.0.1',
 
     # any module necessary for this one to work correctly
     'depends': ['base', 'crm', 'partner_firstname'],
@@ -27,6 +27,6 @@
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
-        'views/crm_lead.xml',
+        'views/crm_lead_view.xml',
     ],
 }

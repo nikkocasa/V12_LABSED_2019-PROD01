@@ -4,7 +4,7 @@
 
 <odoo>
     <record id="crm_case_form_view_leads" model="ir.ui.view">
-        <field name="name">Add firstname and lastname</field>
+        <field name="name">Leads firstname lastname</field>
         <field name="model">crm.lead</field>
         <field name="inherit_id" ref="crm.crm_case_form_view_leads"/>
         <field name="arch" type="xml">
@@ -20,14 +20,14 @@
             <xpath expr="//field[@name='contact_name']" position="after">
                 <field name="contact_lastname" placeholder="Lastname"/>
             </xpath>
-            <xpath expr="//field[@name='email_from']" position="before">
+            <xpath expr="//field[@name='function']" position="before">
                 <field name="lead_language"/>
             </xpath>
         </field>
     </record>
 
     <record id="crm_case_form_view_oppor" model="ir.ui.view">
-        <field name="name">Add firstname and lastname</field>
+        <field name="name">Opportunities firstname lastname</field>
         <field name="model">crm.lead</field>
         <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
         <field name="arch" type="xml">
