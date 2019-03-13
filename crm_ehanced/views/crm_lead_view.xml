@@ -14,15 +14,25 @@
             <xpath expr="//label[@for='contact_name']" position="attributes">
                 <attribute name="string">Contact Name</attribute>
             </xpath>
-            <xpath expr="//field[@name='contact_name']" position="attributes">
-                <attribute name="placeholder">Firstname</attribute>
+            <xpath expr="//field[@name='contact_name']" position="replace">
+                <field name="title_shortcut"
+                       nolabel="1"
+                       class="oe_read_only, oe_inline"/> - <field name="contact_name"
+                                                                  nolabel="1"
+                                                                  class="oe_read_only"/>
             </xpath>
-            <xpath expr="//field[@name='contact_name']" position="after">
-                <field name="contact_lastname" placeholder="Lastname"/>
+            <xpath expr="//field[@name='title']" position="replace">
+                <field name="title" class="oe_edit_only"/>
+            </xpath>
+            <xpath expr="//field[@name='email_from']" position="before">
+                <field name="contact_firstname" nolabel="1" class="oe_edit_only" placeholder="Firstname"/>
+                <field name="contact_lastname" nolabel="1" class="oe_edit_only" placeholder="Lastname"/>
             </xpath>
             <xpath expr="//field[@name='function']" position="before">
                 <field name="lead_language"/>
+                <field name="other_lang_ids" widget="many2many_tags" options="{'no_create': True, 'no_create_edit': True}" domain="[('active','=',True)]" />
             </xpath>
+
         </field>
     </record>
 

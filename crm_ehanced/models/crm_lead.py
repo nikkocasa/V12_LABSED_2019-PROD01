@@ -8,12 +8,51 @@ from odoo import api, fields, models, _
 class CrmLead(models.Model):
     _inherit = "crm.lead"
 
-    contact_name = fields.Char(string="Prénom")
-    contact_lastname = fields.Char(string="Nom")
+    contact_firstname = fields.Char(
+        "First name",
+        index=True,
+    )
+    contact_lastname = fields.Char(
+        "Last name",
+        index=True,
+    )
+    contact_name = fields.Char(
+        string="Full Name",
+        compute="_compute_name",
+        # inverse="_inverse_name_after_cleaning_whitespace",
+        required=False,
+        store=True
+    )
+    title_shortcut = fields.Char(
+        compute="_get_title_shortcut",
+        required=False,
+        size=6,
+        store=True
+    )
     lead_language = fields.Many2one(
                     comodel_name="res.lang",
-                    string=_('Langue du contact'))
+                    string='Langue du contact')
+    other_lang_ids = fields.Many2many(
+        comodel_name='res.lang',
+        relation='crm_lead_lang_rel',
+        column1='lead_id',
+        column2='land_id',
+        string='Other language')
     date_contact = fields.Date(string="Date du contact")
+
+    @api.onchange("title")
+    def _get_title_shortcut(self):
+        for rec in self:
+            rec.title_shortcut = self.env["res.partner.title"].search([('id', '=', rec.title.id)]).shortcut if rec.title else ""
+
+    @api.multi
+    @api.depends("contact_firstname", "contact_lastname")
+    def _compute_name(self):
+        """Write the 'name' field according to splitted data."""
+        for record in self:
+            record.contact_name = self.env["res.partner"]._get_computed_name(
+                record.contact_lastname, record.contact_firstname,
+            )
 
     @api.multi
     def _create_lead_partner_data(self, name, is_company, parent_id=False):
@@ -29,7 +68,13 @@ class CrmLead(models.Model):
                 })
             if self.contact_name:
                 lead_partner_data.update({
-                    "firstname": self.contact_name,
+                    "name": self.contact_name,
+                })
+                # if 'name' in lead_partner_data:
+                #     del lead_partner_data['name']
+            if self.contact_firstname:
+                lead_partner_data.update({
+                    "firstname": self.contact_firstname,
                 })
                 if 'name' in lead_partner_data:
                     del lead_partner_data['name']
@@ -49,8 +94,10 @@ class CrmLead(models.Model):
             partner = self.env["res.partner"].browse(partner_id)
             if not partner.is_company:
                 result.update({
-                    "contact_name": partner.firstname,
+                    "contact_name": partner.name,
+                    "contact_firstname": partner.firstname,
                     "contact_lastname": partner.lastname,
                     "lead_language": partner.lang,
                 })
         return result
+
