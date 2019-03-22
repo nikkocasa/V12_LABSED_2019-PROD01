@@ -2,32 +2,43 @@
 <odoo>
     <data>
         <record id="res_partner_city_form_view" model="ir.ui.view">
-            <field name="name">res.city.form</field>
+            <field name="name">res city form</field>
             <field name="model">res.city</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form name="Cities">
                     <div>
+                        <group colspan="4">
+                            <label for="country_id" string="Country name : " class="oe_edit_only oe_inline" select="1"/>
+                            <field name="country_id" class="oe_edit_only" nolabel="1"/>
+                            <label for="state_id" string="State name : " class="oe_edit_only oe_inline"/>
+                            <field name="state_id" class="oe_edit_only" nolabel="1"/>
+                            <label for="area_id" string="Zone/Area name : " class="oe_edit_only" nolabel="1"/>
+                            <field name="area_id" class="oe_edit_only" nolabel="1"/>
+                        </group>
                         <h3>
-                            <label for="name" string="City name : " class="oe_edit_only"/>
-                            <field name="name" select="1" required="True"/>
+                            <group colspan="4">
+                                <label for="name" string="City name : " class="oe_edit_only oe_inline"/>
+                                <field name="name" class="oe_edit_only" required="True" nolabel="1"/>
+                                <label for="zipcode" string="ZIP code : " class="oe_edit_only oe_inline"/>
+                                <field name="zipcode" required="True" class="oe_edit_only" nolabel="1"/>
+                            </group>
                         </h3>
-                        <h4>
-                            <newline/>
-                            <field name="zipcode"/>
-                            <field name="country_id_name" readonly="True"/>
-                            <label for="area_id" string="Zone/Area name : " class="oe_edit_only"/>
-                            <field name="area_id" required="True" class="oe_inline"/>
-                            <field name="state_id_name" readonly="True" /> - <field name="country_id_name" readonly="True" />
-                        </h4>
                     </div>
-                    <group col="4">
-                        <field name="insee_code"/>
+                    <h2>
+                        <field name="name" readonly="True"/>
+                        -
+                        <field name="zipcode" readonly="True"/>
+                        -
+                        <field name="state_id" readonly="True"/>
+                        -
+                        <field name="country_id" readonly="True"/>
+                    </h2>
+                    <group col="6">
+                        <field name="area_id" readonly="True"/>
+                        <field name="insee_code" class="oe_inline"/>
                         <field name="airport_code" class="oe_inline"/>
                     </group>
-                    <!--<group>-->
-                        <!--<field name="zip_ids"/>-->
-                    <!--</group>-->
                 </form>
             </field>
         </record>

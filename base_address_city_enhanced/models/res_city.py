@@ -23,7 +23,7 @@ class City(models.Model):
     _order = 'name'
 
     _sql_constraints = [
-            ('city_zip_uniq', 'UNIQUE (name, zipcode)',  'This City with this Zip Code already exist in the database !')
+            ('city_zip_uniq', 'UNIQUE (name, zipcode, insee_code)',  'This City with this Zip Code already exist in the database !')
     ]
 
     airport_code = fields.Char(
@@ -66,6 +66,67 @@ class City(models.Model):
         string="Longitude",
         digits=(12, 10)
     )
+
+    @api.onchange('country_id')
+    def _onchange_country_id(self):
+        self.ensure_one()
+        if self.country_id: # user coose a country --> select all states
+            if self.state_id not in self.country_id.state_ids: # not already chosen
+                self.state_id = ''
+            return {'domain': {
+                'state_id': [('id', 'in', self.country_id.state_ids.ids)],
+            }}
+
+    @api.onchange('state_id')
+    def _onchange_state_id(self):
+        self.ensure_one()
+        if self.state_id: # user coose a country --> select all states
+            if self.area_id not in self.state_id.area_ids: # not already chosen
+                self.area_id = ''
+            return {'domain': {
+                'area_id': [('id', 'in', self.state_id.area_ids.ids)],
+            }}
+
+    @api.onchange('area_id')
+    def _onchange_state_id(self):
+        self.ensure_one()
+        if self.area_id:
+            if not self.state_id or self.state_id != self.area_id.state_id:
+                self.state_id = self.area_id.state_id
+
+    @api.constrains('state_id', 'area_id')
+    def _check_state_id(self):
+        for rec in self:
+            if rec.area_id:
+                if not rec.state_id or rec.state_id != rec.area_id.state_id:
+                    rec.state_id = rec.area_id.state_id
+
+    #
+    # @api.onchange('zip_id')
+    # def _onchange_zip(self):
+    #     self.ensure_one()
+    #     self.zip = ''
+    #     if self.zip_id:
+    #         self.zip = self.zip_id.name
+    #         self.area_id = self.city_id.area_id
+    #         self.state_id = self.city_id.area_id.state_id
+    #         self.country_id = self.city_id.area_id.state_id.country_id
+    #         if len(self.zip_id.city_ids.ids) == 1:
+    #             # set zip code directly
+    #             self.city_id, self.city = self.zip_id.city_ids.id, self.zip_id.city_ids.name
+    #         elif self.city_id and not (self.city_id.id in self.zip_id.city_ids.ids):
+    #             # the city previously selected is not linked to this zip code
+    #             self.city_id, self.city = False, ''
+    #         return {'domain': {
+    #             'city_id': [('id', 'in', self.zip_id.city_ids.ids)],
+    #                 }}
+    #     else:
+    #         self.zip = ''
+    #         return {'domain': {
+    #             'city_id': self.zip_id.city_ids.ids,
+    #                 }}
+
+
     # gps_coord = fields.Char(
     #     string='Coord. GPS (lat, Long)',
     #     size=28,
