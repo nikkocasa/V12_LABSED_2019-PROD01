@@ -60,11 +60,11 @@ class City(models.Model):
     )
     lat = fields.Float(
         string="Latitude",
-        digits=(12, 10)
+        digits=(13, 10)
     )
     long = fields.Float(
         string="Longitude",
-        digits=(12, 10)
+        digits=(13, 10)
     )
 
     @api.onchange('country_id')
