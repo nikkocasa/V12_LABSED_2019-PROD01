@@ -47,7 +47,7 @@
 
 
         <menuitem id="menu_product_codification"
-          name="Code produits"
+          name="Codification produits"
           parent="stock.menu_product_in_config_stock"
           action="action_product_codification_tree_view"
           sequence="6"/>
