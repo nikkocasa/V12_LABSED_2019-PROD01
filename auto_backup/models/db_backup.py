@@ -39,6 +39,7 @@ def execute(connector, method, *args):
 
 class db_backup(models.Model):
     _name = 'db.backup'
+    _description = 'Backup configuration record'
 
     @api.multi
     def get_db_list(self, host, port, context={}):
@@ -119,7 +120,7 @@ class db_backup(models.Model):
             try:
                 s = paramiko.SSHClient()
                 s.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-                s.connect(ipHost, 22, usernameLogin, passwordLogin, timeout=10)
+                s.connect(ipHost, portHost, usernameLogin, passwordLogin, timeout=10)
                 sftp = s.open_sftp()
                 messageTitle = _("Connection Test Succeeded!\nEverything seems properly set up for FTP back-ups!")
             except Exception as e:
@@ -188,7 +189,7 @@ class db_backup(models.Model):
                     try:
                         s = paramiko.SSHClient()
                         s.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-                        s.connect(ipHost, 22, usernameLogin, passwordLogin, timeout=20)
+                        s.connect(ipHost, portHost, usernameLogin, passwordLogin, timeout=20)
                         sftp = s.open_sftp()
                     except Exception as error:
                         _logger.critical('Error connecting to remote server! Error: ' + str(error))
@@ -259,7 +260,7 @@ class db_backup(models.Model):
                             ir_mail_server = self.env['ir.mail_server']
                             message = "Dear,\n\nThe backup for the server " + rec.host + " (IP: " + rec.sftp_host + ") failed.Please check the following details:\n\nIP address SFTP server: " + rec.sftp_host + "\nUsername: " + rec.sftp_user + "\nPassword: " + rec.sftp_password + "\n\nError details: " + tools.ustr(
                                 e) + "\n\nWith kind regards"
-                            msg = ir_mail_server.build_email("auto_backup_zip@" + rec.name + ".com", [rec.email_to_notify],
+                            msg = ir_mail_server.build_email("auto_backup@" + rec.name + ".com", [rec.email_to_notify],
                                                              "Backup from " + rec.host + "(" + rec.sftp_host + ") failed",
                                                              message)
                             ir_mail_server.send_email(self._cr, self._uid, msg)
@@ -274,7 +275,7 @@ class db_backup(models.Model):
                 # Loop over all files in the directory.
                 for f in os.listdir(dir):
                     fullpath = os.path.join(dir, f)
-                    # Only delete the ones wich are from the current database 
+                    # Only delete the ones wich are from the current database
                     # (Makes it possible to save different databases in the same folder)
                     if rec.name in fullpath:
                         timestamp = os.stat(fullpath).st_ctime

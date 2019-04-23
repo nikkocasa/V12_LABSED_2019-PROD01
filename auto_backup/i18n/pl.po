@@ -17,12 +17,12 @@ msgstr ""
 "X-Launchpad-Export-Date: 2013-04-20 05:35+0000\n"
 "X-Generator: Launchpad (build 16567)\n"
 
-#. module: auto_backup_zip
+#. module: auto_backup
 #: help:db.backup,name:0
 msgid "Database you want to schedule backups for"
 msgstr "Baza danych, dla której chcesz zaplanować robienie kopii zapasowej"
 
-#. module: auto_backup_zip
+#. module: auto_backup
 #: constraint:ir.model:0
 msgid ""
 "The Object name must start with x_ and not contain any special character !"
@@ -30,64 +30,64 @@ msgstr ""
 "Nazwa obiektu musi zaczynać się od x_ oraz nie może zawierać znaków "
 "specjalnych !"
 
-#. module: auto_backup_zip
+#. module: auto_backup
 #: constraint:ir.actions.act_window:0
 msgid "Invalid model name in the action definition."
 msgstr "Nieprawidłowa nazwa modelu w definicji akcji."
 
-#. module: auto_backup_zip
+#. module: auto_backup
 #: model:ir.model,name:auto_backup.model_db_backup
 msgid "db.backup"
 msgstr ""
 
-#. module: auto_backup_zip
+#. module: auto_backup
 #: view:db.backup:0
 msgid ""
 "1) Go to Administration / Configuration / Scheduler / Scheduled Actions"
 msgstr "1) Idź do Administracja / Konfirguracja / Planista / Planowane akcje"
 
-#. module: auto_backup_zip
+#. module: auto_backup
 #: model:ir.actions.act_window,name:auto_backup.action_backup_conf_form
 #: model:ir.ui.menu,name:auto_backup.backup_conf_menu
 msgid "Configure Backup"
 msgstr "Konfiguruj kopie zapasowe"
 
-#. module: auto_backup_zip
+#. module: auto_backup
 #: view:db.backup:0
 msgid "Test"
 msgstr "Przetestuj"
 
-#. module: auto_backup_zip
+#. module: auto_backup
 #: view:db.backup:0
 msgid "IP Configuration"
 msgstr "Konfiguracja adresu IP"
 
-#. module: auto_backup_zip
+#. module: auto_backup
 #: help:db.backup,bkp_dir:0
 msgid "Absolute path for storing the backups"
 msgstr "Pełna ścieżka  dla kopii zapasowych"
 
-#. module: auto_backup_zip
+#. module: auto_backup
 #: model:ir.module.module,shortdesc:auto_backup.module_meta_information
 msgid "Database Auto-Backup"
 msgstr "Automatyczne kopie zapasowe bazy danych"
 
-#. module: auto_backup_zip
+#. module: auto_backup
 #: view:db.backup:0
 msgid "Database Configuration"
 msgstr "Konfiguracja bazy danych"
 
-#. module: auto_backup_zip
+#. module: auto_backup
 #: view:db.backup:0
 msgid "4) Set other values as per your preference"
 msgstr "4) Ustaw inne dane według uznania"
 
-#. module: auto_backup_zip
+#. module: auto_backup
 #: field:db.backup,host:0
 msgid "Host"
 msgstr "Host"
 
-#. module: auto_backup_zip
+#. module: auto_backup
 #: view:db.backup:0
 msgid ""
 "Automatic backup of all the databases under this can be scheduled as "
@@ -95,27 +95,27 @@ msgid ""
 msgstr ""
 "Automatyczne kopie wszystkich baz danych mogą być zaplanowane następująco: "
 
-#. module: auto_backup_zip
+#. module: auto_backup
 #: constraint:ir.ui.view:0
 msgid "Invalid XML for View Architecture!"
 msgstr "XML niewłaściwy dla tej architektury wyświetlania!"
 
-#. module: auto_backup_zip
+#. module: auto_backup
 #: field:db.backup,bkp_dir:0
 msgid "Backup Directory"
 msgstr "Katalog kopii zapasowych"
 
-#. module: auto_backup_zip
+#. module: auto_backup
 #: field:db.backup,name:0
 msgid "Database"
 msgstr "Baza danych"
 
-#. module: auto_backup_zip
+#. module: auto_backup
 #: view:db.backup:0
 msgid "2) Schedule new action(create a new record)"
 msgstr "2) Zaplanuj nową akcję (utwórz nowy rekord)"
 
-#. module: auto_backup_zip
+#. module: auto_backup
 #: model:ir.module.module,description:auto_backup.module_meta_information
 msgid ""
 "The generic Open ERP Database Auto-Backup system enables the user to make "
@@ -148,7 +148,7 @@ msgstr ""
 "'Dane techniczne'.\n"
 "4) Ustaw inne dane według uznania"
 
-#. module: auto_backup_zip
+#. module: auto_backup
 #: view:db.backup:0
 msgid ""
 "3) Set 'Object' to 'db.backup' and 'Function' to 'schedule_backup' under "
@@ -157,12 +157,12 @@ msgstr ""
 "3) Ustaw 'Obiekt' na 'db.backup' i 'Funkcja' na 'schedule_backup' na stronie "
 "'Dane techniczne'."
 
-#. module: auto_backup_zip
+#. module: auto_backup
 #: view:db.backup:0
 msgid "Help"
 msgstr "Pomoc"
 
-#. module: auto_backup_zip
+#. module: auto_backup
 #: view:db.backup:0
 msgid ""
 "This configures the scheduler for automatic backup of the given database "
@@ -172,7 +172,7 @@ msgstr ""
 "określonej bazy danych na na określonym hoście (komputerze) na określonym "
 "porcie w regularnych terminach."
 
-#. module: auto_backup_zip
+#. module: auto_backup
 #: field:db.backup,port:0
 msgid "Port"
 msgstr "Port"
