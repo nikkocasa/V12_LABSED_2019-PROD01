@@ -97,6 +97,8 @@ class ProductProduct(models.Model):
         size=12,
         help="Code à Barre attribué par l'organisme gestionnaire des EAN13 (GS1). Ne pas modifier : données externes"
     )
+    _sql_constraints = [
+        ('set_uniq_default_code', 'unique (default_code)', 'Le Code Produit doit être unique dans la base')]
 
     @api.one
     @api.depends('density_min', 'density_max')
@@ -124,7 +126,10 @@ class ProductProduct(models.Model):
     #         # en fait, il faudrait mettre à jour le code produit du template avec ".00" comme num variante
 
     def action_setProductCode(self):
-        self.default_code = self.calculated_code
+        if self.calculated_code:
+            self.default_code = self.action_getProductCode(modePreview=False)
+        else:
+            raise Warning(_("Mise à jour de la \'référence interne\'") + '\n\n' + _("Obtenez un Code avant de l\'affecter pour le vérifier"))
 
     def action_setCodeBar(self):
         if self.default_code:
