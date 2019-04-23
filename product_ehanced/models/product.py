@@ -4,6 +4,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import models, fields, api, tools, _
+from odoo.exceptions import Warning
 
 class ProductProduct(models.Model):
     _inherit = 'product.product'
@@ -19,6 +20,7 @@ class ProductProduct(models.Model):
     _part_plant_list = [('fleurs', 'Fleurs'),
                         ('graines', 'Graines'),
                         ('plante_entiere', 'Plante entière'),
+                        ('partie aerienne', 'Partie aérienne'),
                         ('sommites_fleuries', 'Sommités fleuries'),
                         ('bois', 'Bois'),
                         ('écorce_agrumes', 'Écorce agrumes'),
@@ -32,9 +34,9 @@ class ProductProduct(models.Model):
                         ('racines', 'Racines'),
                         ('rameaux_et_feuilles_ou_aiguilles', 'Rameaux et feuilles ou aiguilles'),
                         ('boutons_floraux', 'Boutons floraux'),
-                        ('fruits', 'Fruits'),
-                        ('petales', 'Pétales')
+                        ('fruits', 'Fruits')
                         ]
+    _part_plant_list.sort()
 
     variante_num = fields.Integer(
         string='Code de la variante',
@@ -127,7 +129,10 @@ class ProductProduct(models.Model):
 
     def action_setProductCode(self):
         if self.calculated_code:
-            self.default_code = self.action_getProductCode(modePreview=False)
+            _default_code = self.action_getProductCode(modePreview=False)
+            self.default_code = _default_code
+            print(self.default_code)
+            # self.default_code = self.action_getProductCode(modePreview=False)
         else:
             raise Warning(_("Mise à jour de la \'référence interne\'") + '\n\n' + _("Obtenez un Code avant de l\'affecter pour le vérifier"))
 
@@ -145,6 +150,7 @@ class ProductProduct(models.Model):
         code = self.categ_id.get_full_code(prewiew=modePreview, sep=True)
         variant_code = self.variante_num if self.variante_num else 0
         self.calculated_code = "{}.{:02d}".format(code, variant_code) if code else "Erreur, le code ou la variante n'aont pas été défini"
+        return self.calculated_code
 
     # returns the checksum of the ean13, or -1 if the ean has not the correct length, ean must be a string
     def ean_checksum(self, ean):

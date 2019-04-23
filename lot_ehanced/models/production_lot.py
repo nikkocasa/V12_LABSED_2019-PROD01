@@ -18,7 +18,12 @@ class StockProductionLot(models.Model):
 
     _ContainerType = [('aluminiun_bottle', 'Estagnon aliminuim'),
                       ('glass_bottle', 'Bouteille verre'),
-                      ('plastic', 'Falcon plastique')
+                      ('plastic bottle', 'Flacon plastique'),
+                      ('plastic bucket', 'Seau plastique'),
+                      ('plastic bag', 'Sac plastique'),
+                      ('plastic cask', 'Fût plastique'),
+                      ('paper bag', 'Sac papier'),
+                      ('cardboard cask', 'Fût en carton')
                       ]
 
     supplier_id = fields.Many2one(
