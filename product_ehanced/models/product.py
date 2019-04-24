@@ -34,6 +34,7 @@ class ProductProduct(models.Model):
                         ('racines', 'Racines'),
                         ('rameaux_et_feuilles_ou_aiguilles', 'Rameaux et feuilles ou aiguilles'),
                         ('boutons_floraux', 'Boutons floraux'),
+                        ('resine', 'Résine'),
                         ('fruits', 'Fruits')
                         ]
     _part_plant_list.sort()
