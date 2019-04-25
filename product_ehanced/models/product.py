@@ -148,9 +148,17 @@ class ProductProduct(models.Model):
 
     def action_getProductCode(self, modePreview=True):
         code = self.categ_id.get_full_code(prewiew=modePreview, sep=True)
-        variant_code = self.variante_num if self.variante_num else 0
-        self.calculated_code = "{}.{:02d}".format(code, variant_code) if code else "Erreur, le code ou la variante n'aont pas été défini"
+        # variant_code = self.variante_num if self.variante_num else 0
+        variant_code = self.variante_num if self.variante_num else self._get_last_variante_code()
+        self.calculated_code = "{}.{:02d}".format(code, variant_code) if code else _("Erreur, le code ou la variante n'ont pas été correctement défini")
         return self.calculated_code
+
+    def _get_last_variante_code(self):
+        if len(self) == 1:
+            # ici, on attribue comme numéro de variante le numéro suivant : i.e., la premiere variante '01', la deuxième '02', etc
+            if not self.variante_num:
+                self.variante_num = self.product_tmpl_id.product_variant_count + 1
+                return self.variante_num
 
     # returns the checksum of the ean13, or -1 if the ean has not the correct length, ean must be a string
     def ean_checksum(self, ean):
