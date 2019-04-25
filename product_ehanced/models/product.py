@@ -130,12 +130,11 @@ class ProductProduct(models.Model):
 
     def action_setProductCode(self):
         if self.calculated_code:
-            _default_code = self.action_getProductCode(modePreview=False)
-            self.default_code = _default_code
-            print(self.default_code)
-            # self.default_code = self.action_getProductCode(modePreview=False)
+            self.default_code = self.action_getProductCode(modePreview=False)
         else:
-            raise Warning(_("Mise à jour de la \'référence interne\'") + '\n\n' + _("Obtenez un Code avant de l\'affecter pour le vérifier"))
+            raise Warning(_("Mise à jour de la \'référence interne\'") \
+                          + '\n\n' + _("Obtenez un Code avant de l\'affecter pour le vérifier") \
+                          + '\n' + _("(Seule l'affection du code incrémente la séquence interne)"))
 
     def action_setCodeBar(self):
         if self.default_code:
