@@ -21,13 +21,14 @@
                 <field name="production_date" string="Date de prod" sequence="1" colspan="6"/>
             </xpath>
             <xpath expr="//group[@name='main_group']" position="after">
-                <group name="info" string="Information " col="6">
+                <group name="info" string="Information " col="8">
                     <field name="supplier_id" colspan="4"/>
+                    <field name="container_weight" colspan="4"/>
                     <field name="container_type" colspan="4"/>
-                    <field name="container_weight"/>
-                    <field name="summary_att"/>
+                    <field name="lot_density" colspan="4"/>
                 </group>
                 <group name="options" string="Options" col="4">
+                    <field name="summary_att"/>
                     <field name="with_samples" class="oe_inline"/>
                     <field name="with_analyses"/>
 

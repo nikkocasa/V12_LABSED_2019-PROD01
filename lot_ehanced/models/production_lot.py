@@ -32,7 +32,7 @@ class StockProductionLot(models.Model):
         domain=[('supplier', '=', True)],
         # required=True,
         # ondelete='restrict',
-        help="Ne pas oublier !! information imortante"
+        help=_("Ne pas oublier !! information imortante")
     )
     production_date = fields.Datetime(
         string="Date de production",
@@ -48,6 +48,11 @@ class StockProductionLot(models.Model):
         string='Tare contenant en kg',
         digits=(6, 4),
         copy=False
+    )
+    lot_density = fields.Float(
+        string="Densité du lot (Kg/Litre)",
+        help="Permet de contrôler le volume restant par le poids",
+        digits=(6,4)
     )
     with_samples = fields.Boolean(
         string="Échantillonnage",
