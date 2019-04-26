@@ -41,8 +41,8 @@ class ProductProduct(models.Model):
 
     variante_num = fields.Integer(
         string='Code de la variante',
-        #default=lambda self: self._get_last_variante_code(),
-        readonly = True
+        default=lambda self: self._get_last_variante_code(),
+        # readonly = True
     )
 
     # Botanic Name
@@ -145,6 +145,13 @@ class ProductProduct(models.Model):
               self.barcode = _barcode + str(check_sum)
            else:
               self.barcode = "# Erreur de cheksun"
+
+    # def action_getProductCode(self, modePreview=True):
+    #     code = self.categ_id.get_full_code(prewiew=modePreview, sep=True)
+    #     # variant_code = self.variante_num if self.variante_num else 0
+    #     variant_code = self.variante_num if self.variante_num else self._get_last_variante_code()
+    #     self.calculated_code = "{}.{:02d}".format(code, variant_code) if code else _("Erreur, le code ou la variante n'ont pas été correctement défini")
+    #     return self.calculated_code
 
     def action_getProductCode(self, modePreview=True):
         code = self.categ_id.get_full_code(prewiew=modePreview, sep=True)

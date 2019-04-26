@@ -32,7 +32,7 @@ class StockProductionLot(models.Model):
         domain=[('supplier', '=', True)],
         # required=True,
         # ondelete='restrict',
-        help="Ne pas oublier !! information imortante"
+        help=_("Ne pas oublier !! information imortante")
     )
     production_date = fields.Datetime(
         string="Date de production",
@@ -48,6 +48,16 @@ class StockProductionLot(models.Model):
         string='Tare contenant en kg',
         digits=(6, 4),
         copy=False
+    )
+    lot_density = fields.Float(
+        string="Densité du lot (Kg/Litre)",
+        help="Permet de contrôler le volume restant par le poids",
+        digits=(6,4)
+    )
+    info_prod_density = fields.Char(
+        string="Densité produit (Min / Moy / Max)",
+        compute='_getProdDensities',
+        store=False
     )
     with_samples = fields.Boolean(
         string="Échantillonnage",
@@ -101,6 +111,28 @@ class StockProductionLot(models.Model):
         string="Fichier lié",
         copy=False
     )
+    analysis_sheet =fields.Boolean(
+        string="Bulletin d'analyse",
+        copy=False
+    )
+    analysis_sheet_attach =fields.Many2one(
+        comodel_name="ir.attachment",
+        string="Fichier lié",
+        copy=False
+    )
+    other_doc = fields.Boolean(
+        string="Bulletin d'analyse",
+        copy=False
+    )
+    other_doc_name = fields.Char(
+        string="Nom",
+        copy=False
+    )
+    other_doc_attach =fields.Many2one(
+        comodel_name="ir.attachment",
+        string="Fichier lié",
+        copy=False
+    )
     summary_att = fields.Char(
         string="SITAC",
         size=6,
@@ -108,9 +140,19 @@ class StockProductionLot(models.Model):
         store=True
     )
     sequence_editable = fields.Boolean(
-        compute='_onchange_product',
+        compute='_onchange_prod_seq_edit',
         store=False
     )
+
+    @api.onchange('product_id')
+    def _getProdDensities(self):
+        if self.product_id:
+            self.info_prod_density = _("Kg/Litre : Min: ") + "{:05.3f}".format(self.product_id.density_min) \
+                                     + _("\n/Moy: ") + "{:05.3f}".format(self.product_id.density_moy) \
+                                     + _("/ Max: ") + "{:05.3f}".format(self.product_id.density_max)
+        else:
+            self.info_prod_density = ""
+        # return self.info_prod_density
 
     @api.onchange('product_id')
     def _onchange_prod_seq_edit(self):
