@@ -53,6 +53,14 @@
                             <field name="chromato_file" string="Chromato"/>
                             <field name="chromato_file_attach" string="Fichier_lié"
                               attrs="{'invisible': [('chromato_file', '!=', True)]}"/>
+                            <field name="analysis_sheet" string="Analyses"/>
+                            <field name="analysis_sheet_attach" string="Fichier_lié"
+                              attrs="{'invisible': [('analysis_sheet', '!=', True)]}"/>
+                            <field name="other_doc" string="Autre" class="oe_inline"/>
+                            <field name="other_doc_name" string="Nom" class="oe_inline"
+                              attrs="{'invisible': [('other_doc', '!=', True)]}"/>
+                            <field name="other_doc_attach" string="Fichier_lié"
+                              attrs="{'invisible': [('other_doc', '!=', True)]}"/>
                         </group>
                     </page>
                     <page name="samples" string="Echantillons" col="4"
