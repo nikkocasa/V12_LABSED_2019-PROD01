@@ -111,6 +111,28 @@ class StockProductionLot(models.Model):
         string="Fichier lié",
         copy=False
     )
+    analysis_sheet =fields.Boolean(
+        string="Bulletin d'analyse",
+        copy=False
+    )
+    analysis_sheet_attach =fields.Many2one(
+        comodel_name="ir.attachment",
+        string="Fichier lié",
+        copy=False
+    )
+    other_doc = fields.Boolean(
+        string="Bulletin d'analyse",
+        copy=False
+    )
+    other_doc_name = fields.Char(
+        string="Nom",
+        copy=False
+    )
+    other_doc_attach =fields.Many2one(
+        comodel_name="ir.attachment",
+        string="Fichier lié",
+        copy=False
+    )
     summary_att = fields.Char(
         string="SITAC",
         size=6,
