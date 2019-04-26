@@ -54,6 +54,11 @@ class StockProductionLot(models.Model):
         help="Permet de contrôler le volume restant par le poids",
         digits=(6,4)
     )
+    info_prod_density = fields.Char(
+        string="Densité produit (Min / Moy / Max)",
+        compute='_getProdDensities',
+        store=False
+    )
     with_samples = fields.Boolean(
         string="Échantillonnage",
         copy=False
@@ -113,9 +118,19 @@ class StockProductionLot(models.Model):
         store=True
     )
     sequence_editable = fields.Boolean(
-        compute='_onchange_product',
+        compute='_onchange_prod_seq_edit',
         store=False
     )
+
+    @api.onchange('product_id')
+    def _getProdDensities(self):
+        if self.product_id:
+            self.info_prod_density = _("Kg/Litre : Min: ") + "{:05.3f}".format(self.product_id.density_min) \
+                                     + _("\n/Moy: ") + "{:05.3f}".format(self.product_id.density_moy) \
+                                     + _("/ Max: ") + "{:05.3f}".format(self.product_id.density_max)
+        else:
+            self.info_prod_density = ""
+        # return self.info_prod_density
 
     @api.onchange('product_id')
     def _onchange_prod_seq_edit(self):

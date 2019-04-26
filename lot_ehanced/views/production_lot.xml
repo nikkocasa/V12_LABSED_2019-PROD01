@@ -25,7 +25,8 @@
                     <field name="supplier_id" colspan="4"/>
                     <field name="container_weight" colspan="4"/>
                     <field name="container_type" colspan="4"/>
-                    <field name="lot_density" colspan="4"/>
+                    <field name="lot_density" class="oe_inline"/>
+                    <field name="info_prod_density" nolabel="1"/>
                 </group>
                 <group name="options" string="Options" col="4">
                     <field name="summary_att"/>
