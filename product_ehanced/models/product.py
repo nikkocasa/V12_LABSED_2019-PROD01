@@ -97,7 +97,7 @@ class ProductProduct(models.Model):
     )
     sale_GS1_EAN13 = fields.Char(
         string="EAN13 Vente (GS1)",
-        size=12,
+        size=13,
         help="Code à Barre attribué par l'organisme gestionnaire des EAN13 (GS1). Ne pas modifier : données externes"
     )
     _sql_constraints = [
