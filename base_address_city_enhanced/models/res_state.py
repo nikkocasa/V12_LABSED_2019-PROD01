@@ -8,10 +8,6 @@ _logger = logging.getLogger(__name__)
 class State(models.Model):
     _inherit = 'res.country.state'
 
-    # country_id = fields.Many2one(
-    #     string="Country",
-    #     comodel_name='res.country'
-    # )
     area_ids = fields.One2many(
         string="Area list",
         comodel_name='res.country.state.area',

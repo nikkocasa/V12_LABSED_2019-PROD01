@@ -13,7 +13,7 @@
                         <field name="state_id" required="True"/>
                     </group>
                     <group>
-                        <field name="city_ids" required="False"/>
+                        <field name="city_ids" required="False" context="{'default_state_id':state_id}"/>
                     </group>
                 </form>
             </field>
