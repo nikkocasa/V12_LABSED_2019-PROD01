@@ -29,7 +29,7 @@
         'views/res_area.xml',
         'views/res_state.xml',
         'views/res_country.xml',
-        # 'views/partner.xml',
+        'views/partner.xml',
         'views/menus.xml',
         # 'data/res.country.state.csv'
     ],

@@ -22,11 +22,12 @@
     'version': '12.0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'crm', 'partner_firstname'],
+    'depends': ['base', 'crm', 'partner_firstname','utm'],
 
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
         'views/crm_lead_view.xml',
+        'views/compaign_view.xml',
     ],
 }
