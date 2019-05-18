@@ -1,4 +1,4 @@
 [submodule "E12_Labsed2019"]
 	path = E12_Labsed2019
-	url = git@github.com:nikkocasa
+	url = git://
 	branch = master
